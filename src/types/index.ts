@@ -1,5 +1,5 @@
 export interface TrackingEvent {
-  id: number;
+  id: bigint;
   link_name: string;
   campaign_name: string;
   value: number;

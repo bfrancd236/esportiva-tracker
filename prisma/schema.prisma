@@ -3,18 +3,19 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 model TrackingEvent {
-  id                Int      @id @default(autoincrement())
-  link_name         String
-  campaign_name     String
-  value             Float
+  id                BigInt   @id @default(autoincrement())
+  link_name         String   @db.VarChar(255)
+  campaign_name     String   @db.VarChar(255)
+  value             Decimal  @db.Decimal(10, 2)
   registration_date DateTime
-  ip                String?
-  user_agent        String?
+  ip                String?  @db.VarChar(45)
+  user_agent        String?  @db.Text
   created_at        DateTime @default(now())
 
   @@index([campaign_name])
